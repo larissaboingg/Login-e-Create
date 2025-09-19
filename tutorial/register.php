@@ -9,6 +9,29 @@
 <body>
         <div class="container">
             <div class="box form-box">
+
+            <?php 
+            
+            include("php/config.php");
+            id(isset($_POST['submit'])){
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $age = $_POST['age'];
+                $password = $_POST['password'];
+
+             // verifying the unique email
+
+             $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email-'$email'");
+
+             if(mysqli_num_rows($verify_query) !=0 ){
+                echo "<div class='message'>
+                            <p>This email is used, Try another One Please!</p>"
+             }
+
+            }
+            
+            ?>
+
                 <header>Sign Up</header>
                 <form action="" method="post">
                     <div class="field input">
@@ -36,7 +59,7 @@
                         <input type="submit" name="submit" value="Login" required>
                     </div>
                     <div class="links">
-                        Already a member? <a href="index.html">Sign In</a>
+                        Already a member? <a href="index.php">Sign In</a>
                     </div>
                 </form>
             </div>

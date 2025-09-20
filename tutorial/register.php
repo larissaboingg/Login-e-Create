@@ -21,14 +21,27 @@
 
              // verifying the unique email
 
-             $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email-'$email'");
+             $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email='$email'");
 
              if(mysqli_num_rows($verify_query) !=0 ){
                 echo "<div class='message'>
-                            <p>This email is used, Try another One Please!</p>"
+                            <p>This email is used, Try another One Please!</p>
+                      </div> <br>";
+                echo "<a href='Javascript:self.history.back()'><button>Go Back</button>";
+             }
+             else{
+
+
+                mysqli_query($con,"INSERT INTO users(Username,Email,Age,Password) VALUES('$username','$email','$age','$password')") or die("Erroe Occured");
+
+                echo "<div class='message'>
+                            <p>Registration successfully!</p>
+                      </div> <br>";
+                echo "<a href='index.php'><button>Login Now</button>";
+
              }
 
-            }
+            }else{
             
             ?>
 
@@ -56,13 +69,14 @@
 
                     <div class="field">
                         
-                        <input type="submit" name="submit" value="Login" required>
+                        <input type="submit" name="submit" value="Register" required>
                     </div>
                     <div class="links">
                         Already a member? <a href="index.php">Sign In</a>
                     </div>
                 </form>
             </div>
+            <?php } ?>
         </div>
 </body>
 </html>
